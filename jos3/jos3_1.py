@@ -693,8 +693,12 @@ class JOS3():
 
         # 计算地形系数 K
         snow_thickness_m = snow_thickness / 100  # 假设输入的是厘米，转换为米
-        K = 1.3 + 0.08 * snow_thickness_m
-
+        #K = 1.3 + 0.08 * snow_thickness_m
+        K = 0.0005*z^3 + 0.0005*z^2 +0.1072*z+1.2604
+        # 下沉深度z
+        z = snow_thickness_cm * (1-p0/0.3096)
+        # 初始雪密度
+        p0= 0.3  #Mg/m^3
         # 计算代谢率 P
         P_1 = 1.5 * W + 2.0 * (W + L) * (L / W) ** 2 + K * (W + L) * (1.5 * v ** 2 + 0.35 * v * G)
 
@@ -1365,4 +1369,5 @@ def _to17array(inp):
         return _distribute_scalar(arr[0])
 
     if __name__ == "__main__":
+
         import jos3
